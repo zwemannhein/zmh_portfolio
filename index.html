@@ -1,201 +1,1234 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="my">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZWE MANN HEIN - Portfolio</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background: #f0f2f5;
-            color: #333;
-        }
+      /* CSS Variables for better maintainability and consistent styling */
+      :root {
+        --primary-color: #007bff;
+        /* Bright Blue */
+        --primary-dark: #0056b3;
+        /* Darker Blue for hover states */
+        --secondary-bg: #e9ecef;
+        /* Light Gray for skill tags, table headers */
+        --light-bg: #f8f9fa;
+        /* Lighter Gray for tech categories, training items */
+        --body-bg: #f0f2f5;
+        /* Off-white general background */
+        --card-bg: #ffffff;
+        /* White background for main containers and experience items */
+        --text-color: #333;
+        /* Dark text for general content */
+        --soft-text-color: #555;
+        /* Medium dark text for less emphasized content */
+        --light-text-color: #777;
+        /* Light text for subtle details */
+        --heading-color: #2c3e50;
+        /* Darker heading color */
+        --sub-heading-color: #34495e;
+        /* Medium heading color */
+        --border-color: #e0e0e0;
+        /* Light border for cards and containers */
+        --table-border-color: #dee2e6;
+        /* Slightly darker border for table cells */
+
+        --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+        --border-radius-sm: 6px;
+        --border-radius-md: 10px;
+        --border-radius-lg: 30px;
+        /* For pill-shaped elements like skill tags */
+
+        --spacing-xs: 8px;
+        --spacing-sm: 10px;
+        --spacing-md: 15px;
+        --spacing-lg: 20px;
+        --spacing-xl: 30px;
+      }
+
+      body {
+        font-family: "Poppins", "Myanmar3", sans-serif; /* Poppins for English, Myanmar3 for Burmese */
+        margin: 0;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased; /* Smoother font rendering on WebKit browsers */
+        -moz-osx-font-smoothing: grayscale; /* Smoother font rendering on Firefox */
+      }
+
+      /* --- Header Section (Top Navigation Bar) --- */
+      header {
+        background-color: var(--card-bg);
+        padding: var(--spacing-md) var(--spacing-xl);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky; /* Makes header stick to the top when scrolling */
+        top: 0;
+        z-index: 1000; /* Ensures header is always on top */
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease; /* Smooth transition for scroll effect */
+      }
+
+      /* Effect for header when user scrolls down */
+      header.scrolled {
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.95
+        ); /* Slightly transparent white */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px); /* Modern frosted glass effect */
+      }
+
+      .logo {
+        font-size: 1.6em;
+        font-weight: bold;
+        color: var(--primary-dark);
+      }
+
+      nav a {
+        margin-left: 22px;
+        text-decoration: none;
+        color: var(--soft-text-color);
+        font-weight: 500;
+        transition: color 0.3s ease, transform 0.2s ease; /* Smooth transitions for hover */
+      }
+
+      nav a:hover,
+      nav a.active {
+        color: var(--primary-color);
+        transform: translateY(-2px); /* Slight lift effect on hover/active */
+      }
+
+      .profile-icon img {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%; /* Makes image circular */
+        margin-left: 20px;
+        object-fit: cover; /* Ensures image fills the circle without distortion, cropping if necessary */
+        object-position: center; /* Centers the image within the circle */
+        border: 2px solid var(--primary-color);
+        transition: transform 0.3s ease;
+      }
+
+      .profile-icon img:hover {
+        transform: scale(1.1); /* Slight zoom on hover */
+      }
+
+      /* --- General Container and Section Styling --- */
+      .container {
+        max-width: 1000px; /* Max width for content */
+        margin: 40px auto; /* Centers the container with top/bottom margin */
+        padding: 25px;
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-md);
+      }
+
+      .section {
+        margin-bottom: 60px; /* Space between sections */
+        padding-top: 70px; /* Provides space for sticky header when linking to section IDs */
+        margin-top: -70px; /* Negative margin to prevent extra scroll space from padding-top */
+      }
+
+      .section h2 {
+        font-size: 2.4em;
+        margin-bottom: var(--spacing-xl);
+        border-bottom: 3px solid var(--primary-color); /* Underline effect for titles */
+        padding-bottom: 12px;
+        color: var(--heading-color);
+        font-weight: 600;
+        display: flex;
+        align-items: center; /* Aligns icon with text */
+      }
+
+      .section h2 i {
+        margin-right: var(--spacing-md);
+        color: var(--primary-color);
+        font-size: 0.9em; /* Adjust icon size relative to heading */
+      }
+
+      .section h3 {
+        font-size: 1.7em;
+        margin-top: 35px;
+        margin-bottom: 18px;
+        color: var(--sub-heading-color);
+      }
+
+      /* --- Hero Section (Top introductory section) --- */
+      .hero {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .hero img.profile-pic {
+        width: 190px;
+        height: 190px;
+        border-radius: 50%; /* Makes image circular */
+        margin-bottom: 28px;
+        object-fit: cover; /* Ensures image fills the circle without distortion, cropping if necessary */
+        object-position: center; /* Centers the image within the circle */
+        border: 7px solid var(--primary-color);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+      }
+
+      .hero img.profile-pic:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+      }
+
+      .hero h1 {
+        font-size: 3em;
+        margin-bottom: 12px;
+        color: var(--text-color);
+        font-weight: 700;
+      }
+
+      .hero .job-title {
+        font-size: 1.5em;
+        color: var(--soft-text-color);
+        margin-bottom: 10px;
+      }
+
+      .hero .location {
+        font-size: 1.2em;
+        color: var(--light-text-color);
+        margin-bottom: 25px;
+      }
+
+      .hero .summary {
+        font-size: 1.15em;
+        color: var(--soft-text-color);
+        max-width: 750px;
+        margin: 0 auto 30px auto;
+        line-height: 1.7;
+      }
+
+      .hero .view-work-button {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 15px 35px;
+        border-radius: var(--border-radius-md);
+        text-decoration: none;
+        font-size: 1.15em;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .hero .view-work-button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-3px); /* Button lifts up on hover */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* --- About Me Section --- */
+      #about p {
+        font-size: 1.15em;
+        line-height: 1.8;
+        color: var(--soft-text-color);
+      }
+
+      /* --- Skills Section --- */
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap; /* Allows skill tags to wrap to next line */
+        gap: var(--spacing-md); /* Space between skill tags */
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .skill-tag {
+        background-color: var(--secondary-bg);
+        color: var(--soft-text-color);
+        padding: 12px 20px;
+        border-radius: var(--border-radius-lg); /* Pill shape */
+        font-size: 1em;
+        font-weight: 500;
+        transition: background-color 0.3s ease, color 0.3s ease,
+          transform 0.2s ease, box-shadow 0.3s ease;
+      }
+
+      .skill-tag:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px) scale(1.03); /* Lift and slight zoom */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .technologies-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(230px, 1fr)
+        ); /* Responsive grid columns */
+        gap: 28px;
+      }
+
+      .tech-category {
+        background-color: var(--light-bg);
+        padding: 22px;
+        border-radius: var(--border-radius-md);
+        border: 1px solid var(--border-color);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+      }
+
+      .tech-category:hover {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px); /* Lift effect */
+      }
+
+      .tech-category h4 {
+        margin-top: 0;
+        margin-bottom: 18px;
+        color: var(--primary-color);
+        font-size: 1.25em;
+      }
+
+      .tech-category ul {
+        list-style: none; /* Removes default bullet points */
+        padding: 0;
+        margin: 0;
+      }
+
+      .tech-category li {
+        margin-bottom: var(--spacing-sm);
+        font-size: 1em;
+        color: var(--soft-text-color);
+      }
+
+      .tech-category li::before {
+        content: "✓ "; /* Custom bullet point */
+        color: var(--primary-color);
+        margin-right: var(--spacing-xs);
+        font-weight: bold;
+      }
+
+      /* --- Work/Experience Section --- */
+      .experience-item {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius-md);
+        padding: 25px;
+        margin-bottom: 25px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+      }
+
+      .experience-item:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px); /* Lift effect */
+      }
+
+      .experience-item h4 {
+        font-size: 1.5em;
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .experience-item .company-date {
+        font-size: 1.05em;
+        color: var(--soft-text-color);
+        margin-bottom: 18px;
+        font-style: italic;
+      }
+
+      .experience-item ul {
+        list-style-position: outside;
+        padding-left: 20px;
+        margin: 0;
+      }
+
+      .experience-item li {
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.7;
+        color: var(--soft-text-color);
+      }
+
+      /* --- Certificates & Training Section --- */
+      .certificates-table {
+        width: 100%;
+        border-collapse: collapse; /* Removes space between table cells */
+        margin-top: var(--spacing-md);
+        box-shadow: var(--shadow-sm);
+        border-radius: var(--border-radius-md);
+        overflow: hidden; /* Ensures border-radius is applied to table content */
+      }
+
+      .certificates-table th,
+      .certificates-table td {
+        border: 1px solid var(--table-border-color);
+        padding: 14px 18px;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .certificates-table th {
+        background-color: var(--secondary-bg);
+        font-weight: 600;
+        color: var(--soft-text-color);
+      }
+
+      .certificates-table tr:hover td {
+        background-color: var(--light-bg); /* Row highlight on hover */
+      }
+
+      .certificates-table td a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .certificates-table td a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .status {
+        font-style: italic;
+        color: var(--soft-text-color);
+        font-size: 0.9em;
+      }
+
+      /* --- Training Items Styling (similar to tech categories) --- */
+      .training-item {
+        background-color: var(--light-bg);
+        border-radius: var(--border-radius-md);
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+      }
+
+      .training-item:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+      }
+
+      .training-item h4 {
+        font-size: 1.3em;
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .training-item p {
+        margin-bottom: var(--spacing-xs);
+        line-height: 1.6;
+        color: var(--soft-text-color);
+      }
+
+      .training-item .details {
+        font-size: 0.95em;
+        color: var(--soft-text-color);
+      }
+
+      /* --- Contact Info Section (No Form) --- */
+      .contact-info {
+        text-align: center; /* Center the contact information */
+        margin-bottom: 40px; /* Add some space below info */
+      }
+
+      .contact-info p {
+        font-size: 1.15em;
+        line-height: 1.8;
+        color: var(--soft-text-color);
+        margin-bottom: 10px; /* Space between paragraphs */
+      }
+
+      .contact-info strong {
+        color: var(--text-color);
+      }
+
+      .contact-info a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: inline-block; /* Allows vertical margin if needed */
+        margin: 5px 0; /* Small vertical margin for links */
+      }
+
+      .contact-info a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .social-links {
+        margin-top: 35px;
+        text-align: center; /* Center social links */
+      }
+
+      .social-links h4 {
+        margin-bottom: 18px;
+        font-size: 1.4em;
+        color: var(--sub-heading-color);
+      }
+
+      .social-links a {
+        margin-right: 20px;
+        text-decoration: none;
+        color: var(--primary-color);
+        font-size: 1.15em;
+        font-weight: 500;
+        transition: color 0.2s ease, transform 0.2s ease;
+        display: inline-flex; /* For icon and text alignment */
+        align-items: center;
+      }
+
+      .social-links a i {
+        margin-right: 8px; /* Space between icon and text */
+      }
+
+      .social-links a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+        transform: translateY(-2px);
+      }
+
+      /* --- Footer Section --- */
+      footer {
+        text-align: center;
+        padding: 30px;
+        background-color: #343a40; /* Dark gray for footer background */
+        color: #f8f9fa; /* Light text for footer */
+        margin-top: 60px;
+        font-size: 0.9em;
+      }
+
+      /* --- AOS Utility Classes (already defined, good) --- */
+      .aos-delay-1 {
+        animation-delay: 0.1s !important;
+      }
+
+      .aos-delay-2 {
+        animation-delay: 0.2s !important;
+      }
+
+      .aos-delay-3 {
+        animation-delay: 0.3s !important;
+      }
+
+      /* --- Responsive Design (Media Queries for smaller screens) --- */
+      @media (max-width: 768px) {
         header {
-            background: #fff;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            border-bottom: 1px solid #ddd;
-            z-index: 1000;
+          flex-direction: column; /* Stack logo and nav vertically */
+          padding: var(--spacing-md);
         }
+
+        nav {
+          margin-top: var(--spacing-md);
+          width: 100%;
+          text-align: center;
+        }
+
         nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
+          margin: 0 var(--spacing-sm);
+          display: inline-block;
+          font-size: 0.95em;
         }
-        nav a.active,
-        nav a:hover {
-            color: #007bff;
+
+        .profile-icon {
+          margin-top: var(--spacing-md);
         }
-        .profile-icon img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
+
         .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
+          margin: 20px auto;
+          padding: var(--spacing-md);
         }
-        .hero {
-            text-align: center;
-        }
-        .hero img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
+
         .hero h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
+          font-size: 2.5em;
         }
-        .job-title {
-            font-size: 1.4em;
-            color: #555;
-        }
-        .summary {
-            max-width: 700px;
-            margin: 20px auto;
-            color: #666;
-            line-height: 1.7;
-        }
-        .section {
-            margin-top: 60px;
-        }
+
         .section h2 {
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 10px;
+          font-size: 2em;
+          margin-bottom: var(--spacing-xl);
         }
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+
+        .section h2 i {
+          font-size: 0.8em;
         }
+
+        .section h3 {
+          font-size: 1.5em;
+        }
+
+        #about p,
+        .contact-info p {
+          font-size: 1em;
+        }
+
         .skill-tag {
-            background: #e9ecef;
-            padding: 10px 18px;
-            border-radius: 20px;
+          padding: 10px 18px;
+          font-size: 0.95em;
         }
-        .experience-item {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+
+        .technologies-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 20px;
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #343a40;
-            color: #fff;
-            margin-top: 50px;
+
+        .certificates-table th,
+        .certificates-table td {
+          padding: 10px 12px;
+          font-size: 0.9em;
         }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 1.4em;
+        }
+
+        nav {
+          display: flex;
+          flex-wrap: wrap; /* Allows nav items to wrap to multiple lines */
+          justify-content: center;
+        }
+
+        nav a {
+          margin: 5px 8px; /* Adjust margin for wrapping */
+          font-size: 0.9em;
+        }
+
+        .profile-icon img {
+          width: 38px;
+          height: 38px;
+        }
+
+        .hero h1 {
+          font-size: 2em;
+        }
+
+        .hero .job-title,
+        .hero .location {
+          font-size: 1.1em;
+        }
+
+        .hero .summary {
+          font-size: 1em;
+        }
+
+        .hero img.profile-pic {
+          width: 150px;
+          height: 150px;
+        }
+
+        .view-work-button {
+          padding: 12px 25px;
+          font-size: 1em;
+        }
+
+        .section h2 {
+          font-size: 1.8em;
+        }
+
+        .section h3 {
+          font-size: 1.3em;
+        }
+
+        .skills-list {
+          gap: 10px;
+        }
+
+        .skill-tag {
+          padding: 8px 15px;
+          font-size: 0.85em;
+        }
+
+        .technologies-grid {
+          grid-template-columns: 1fr; /* Single column on very small screens */
+        }
+
+        /* Responsive Table for Certificates Section on small screens */
+        .certificates-table {
+          display: block; /* Make table a block element */
+          overflow-x: auto; /* Allows horizontal scrolling if content is too wide (fallback) */
+          /* Removed white-space: nowrap; here to allow text wrapping within cells */
+          width: 100%; /* Ensure it takes full width */
+        }
+
+        .certificates-table thead,
+        .certificates-table tbody,
+        .certificates-table th,
+        .certificates-table td,
+        .certificates-table tr {
+          display: block; /* Each table element becomes a block, stacking them */
+        }
+
+        .certificates-table thead tr {
+          position: absolute; /* Hide the original table header row */
+          top: -9999px;
+          left: -9999px;
+        }
+
+        .certificates-table tr {
+          border: 1px solid var(--table-border-color);
+          margin-bottom: var(--spacing-md);
+          border-radius: var(--border-radius-sm);
+          overflow: hidden; /* Ensures rounded corners */
+        }
+
+        .certificates-table td {
+          border: none; /* Remove individual cell borders */
+          position: relative;
+          padding-left: 50%; /* Space for the data-label (mobile header) */
+          text-align: right; /* Align actual data to the right */
+          padding: 10px 12px; /* Adjusted padding */
+          white-space: normal; /* IMPORTANT: Allows text to wrap within the cell */
+        }
+
+        .certificates-table td:before {
+          content: attr(
+            data-label
+          ); /* Displays the content of the data-label attribute as a pseudo-element */
+          position: absolute;
+          left: 6px;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap; /* Keep the label itself on one line */
+          text-align: left;
+          font-weight: bold;
+          color: var(--heading-color);
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-<header>
-    <div class="logo">ZWE MANN HEIN</div>
-    <nav>
+  <body>
+    <header>
+      <div class="logo">ZWE MANN HEIN</div>
+      <nav>
         <a href="#hero" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
+        <a href="#certificates">Certificates & Training</a>
         <a href="#contact">Contact</a>
-    </nav>
-    <div class="profile-icon">
-        <img src="images/profile_icon.jpg" alt="Profile">
-    </div>
-</header>
+      </nav>
+      <div class="profile-icon">
+        <img src="images/profile_icon.jpg" alt="Profile Icon" />
+      </div>
+    </header>
 
-<div class="container">
-
-    <!-- HERO -->
-    <section id="hero" class="hero">
-        <img src="images/profile_large.jpg" alt="Zwe Mann Hein">
-        <h1>ZWE MANN HEIN</h1>
-        <p class="job-title">Junior Mobile Developer (Flutter)</p>
-        <p class="summary">
-            Junior Mobile Developer with hands-on experience in Flutter and Dart.
-            I have experience building mobile applications with REST API integration,
-            GPS tracking, real-time communication, and clean UI design.
-            I also have a background in system engineering, which helps me build
-            secure and reliable applications.
+    <div class="container">
+      <section id="hero" class="hero section">
+        <img
+          src="images/profile_large.jpg"
+          alt="Zwe Mann Hein"
+          class="profile-pic"
+          data-aos="zoom-in"
+          data-aos-duration="800"
+        />
+        <h1 data-aos="fade-up" data-aos-delay="200">ZWE MANN HEIN</h1>
+        <p class="job-title" data-aos="fade-up" data-aos-delay="300">
+          Versatile IT Professional & Aspiring Cybersecurity Enthusiast
         </p>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section">
-        <h2>About Me</h2>
-        <p>
-            I am a Junior Mobile Developer specializing in Flutter and Dart.
-            I build mobile apps with modern UI, navigation, and API integration.
+        <p class="location" data-aos="fade-up" data-aos-delay="400">
+          Based in Yangon, Myanmar
         </p>
-        <p>
-            I also worked as a System Engineer before.
-            This helps me understand performance, security, and stability in applications.
+        <p class="summary" data-aos="fade-up" data-aos-delay="500">
+          Versatile IT professional with progressive hands-on experience in
+          system administration, virtualization, and cloud infrastructure. I am
+          currently serving as a System Engineer while expanding my skills in
+          penetration testing and web application security. I am passionate
+          about offensive security with foundational expertise in modern web
+          vulnerabilities and exploitation techniques. Strong in
+          troubleshooting, virtualization platforms, and managing both
+          on-premises and cloud-based systems.
         </p>
-    </section>
+        <a
+          href="#experience"
+          class="view-work-button"
+          data-aos="fade-up"
+          data-aos-delay="600"
+          >View Experience</a
+        >
+      </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section">
-        <h2>Skills</h2>
-        <div class="skills-list">
-            <span class="skill-tag">Flutter (Dart)</span>
-            <span class="skill-tag">Mobile UI</span>
-            <span class="skill-tag">REST API</span>
-            <span class="skill-tag">JWT Authentication</span>
-            <span class="skill-tag">WebSockets</span>
-            <span class="skill-tag">GPS & Maps</span>
-            <span class="skill-tag">State Management</span>
-            <span class="skill-tag">Git & GitHub</span>
-            <span class="skill-tag">Debugging</span>
-            <span class="skill-tag">Linux & Windows</span>
+      <section id="about" class="section">
+        <h2 data-aos="fade-right">
+          <i class="fas fa-user-circle"></i> About Me
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          As a dedicated IT professional, I bring hands-on experience in system
+          administration, virtualization (VMware, Hyper-V), and cloud
+          infrastructure, particularly with AWS foundations. My current role as
+          a System Engineer allows me to provide 24/7 operational support for
+          critical VoIP and call center platforms like Vicidial and 3CX, while
+          also managing and optimizing both Windows and Linux servers.
+        </p>
+        <p data-aos="fade-up" data-aos-delay="200">
+          I am keenly expanding my expertise into offensive security, focusing
+          on penetration testing and web application security. This includes
+          in-depth study of OWASP Top 10 vulnerabilities, common attack vectors
+          such as XSS and SQLi, and practical application of tools like Burp
+          Suite. My commitment to continuous learning is demonstrated through
+          ongoing certifications like CompTIA Security+ and active participation
+          in TryHackMe labs. I am driven to leverage these evolving skills to
+          contribute to robust security practices and innovative solutions.
+        </p>
+      </section>
+
+      <section id="skills" class="section">
+        <h2 data-aos="fade-left"><i class="fas fa-cogs"></i> Skills</h2>
+        <div class="skills-list" data-aos="fade-up">
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="50"
+            >System Administration (Windows/Linux)</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="100"
+            >Virtualization (VMware, Hyper-V)</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="150"
+            >Cloud Infrastructure (AWS)</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="200"
+            >VoIP & Call Center Systems</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="250"
+            >Vicidial</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="300"
+            >FreePBX</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="350"
+            >Asterisk</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="400"
+            >3CX</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="450"
+            >Web Application Security</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="500"
+            >OWASP Top 10</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="550"
+            >XSS</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="600"
+            >SQLi</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="650"
+            >Burp Suite</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="700"
+            >Penetration Testing</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="750"
+            >Web Exploitation</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="800"
+            >Networking Fundamentals</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="850"
+            >TCP/IP</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="900"
+            >DNS</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="950"
+            >VPNs</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="1000"
+            >Firewalls</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="1050"
+            >Technical Support</span
+          >
+          <span class="skill-tag" data-aos="zoom-in-up" data-aos-delay="1100"
+            >Troubleshooting</span
+          >
         </div>
-    </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section">
-        <h2>Experience</h2>
-        <div class="experience-item">
-            <h4>Junior Mobile Developer (Flutter)</h4>
-            <p><em>Young Investors Group (YIG) — Jan 5, 2026 – Present</em></p>
+        <h3 data-aos="fade-right">Technologies Used</h3>
+        <div class="technologies-grid">
+          <div class="tech-category" data-aos="fade-up" data-aos-delay="100">
+            <h4>Operating Systems</h4>
             <ul>
-                <li>Developing mobile applications using Flutter and Dart</li>
-                <li>Building responsive and clean UI</li>
-                <li>Integrating REST APIs and authentication</li>
-                <li>Fixing bugs and improving performance</li>
-                <li>Working with team using Git</li>
+              <li>Windows Server</li>
+              <li>Linux (various distributions)</li>
             </ul>
+          </div>
+          <div class="tech-category" data-aos="fade-up" data-aos-delay="200">
+            <h4>Virtualization</h4>
+            <ul>
+              <li>VMware vSphere</li>
+              <li>Microsoft Hyper-V</li>
+            </ul>
+          </div>
+          <div class="tech-category" data-aos="fade-up" data-aos-delay="300">
+            <h4>Cloud Platforms</h4>
+            <ul>
+              <li>Amazon Web Services (AWS Foundations)</li>
+            </ul>
+          </div>
+          <div class="tech-category" data-aos="fade-up" data-aos-delay="400">
+            <h4>VoIP & Call Center</h4>
+            <ul>
+              <li>Vicidial</li>
+              <li>FreePBX</li>
+              <li>Asterisk</li>
+              <li>3CX</li>
+            </ul>
+          </div>
+          <div class="tech-category" data-aos="fade-up" data-aos-delay="500">
+            <h4>Security Tools</h4>
+            <ul>
+              <li>Burp Suite</li>
+              <li>Nikto (Studying)</li>
+              <li>SQLmap (Studying)</li>
+            </ul>
+          </div>
+          <div class="tech-category" data-aos="fade-up" data-aos-delay="600">
+            <h4>Networking</h4>
+            <ul>
+              <li>TCP/IP, DNS, DHCP</li>
+              <li>VPN Configuration</li>
+              <li>Firewall Management</li>
+            </ul>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:zwemann872003@gmail.com">zwemann872003@gmail.com</a></p>
-        <p>Phone: 09957008712 / 09792840844</p>
-        <p>Website: <a href="http://zwemannhein.talk4fun.net" target="_blank">zwemannhein.talk4fun.net</a></p>
-    </section>
+      <section id="experience" class="section">
+        <h2 data-aos="fade-right">
+          <i class="fas fa-briefcase"></i> Professional Experience
+        </h2>
+        <div class="experience-item" data-aos="fade-left" data-aos-delay="100">
+          <h4>System Engineer (Mid-Level)</h4>
+          <p class="company-date">Blue Ocean — Jan 2025 – Present</p>
+          <ul>
+            <li>
+              Deliver 24/7 operational support for VoIP and call center
+              platforms (Vicidial, 3cx).
+            </li>
+            <li>
+              Configure, manage, and optimize virtual machines using VMware and
+              Hyper-V.
+            </li>
+            <li>Patch, secure, and maintain both Windows and Linux servers.</li>
+            <li>
+              Contribute to cloud migration and infrastructure enhancement
+              projects.
+            </li>
+            <li>
+              Draft technical documentation and assist in implementing security
+              best practices.
+            </li>
+          </ul>
+        </div>
+        <div class="experience-item" data-aos="fade-left" data-aos-delay="200">
+          <h4>Junior System Engineer</h4>
+          <p class="company-date">Blue Ocean — Jun 2024 – Dec 2024</p>
+          <ul>
+            <li>Diagnosed and resolved system and network issues.</li>
+            <li>
+              Provided remote and on-site support for end-users and internal
+              teams.
+            </li>
+            <li>
+              Assisted with server maintenance, backups, and virtualization
+              operations.
+            </li>
+          </ul>
+        </div>
+        <div class="experience-item" data-aos="fade-left" data-aos-delay="300">
+          <h4>Technical Support Specialist</h4>
+          <p class="company-date">Blue Ocean — Jan 2023 – Jun 2024</p>
+          <ul>
+            <li>
+              Provided Tier 1/2 technical support for hardware, software, and OS
+              problems.
+            </li>
+            <li>
+              Resolved networking, desktop, and VoIP issues in a fast-paced
+              environment.
+            </li>
+            <li>
+              Logged and managed incidents to streamline support operations.
+            </li>
+          </ul>
+        </div>
+      </section>
 
-</div>
+      <section id="certificates" class="section">
+        <h2 data-aos="fade-right">
+          <i class="fas fa-certificate"></i> Certifications & Training
+        </h2>
+        <div data-aos="fade-up">
+          <table class="certificates-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Issuing Organization/Platform</th>
+                <th>Status/Date</th>
+                <th>Details/Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Name">CompTIA Security+</td>
+                <td data-label="Issuing Organization/Platform">CompTIA</td>
+                <td data-label="Status/Date" class="status">In Progress</td>
+                <td data-label="Details/Link">N/A (Study Guide)</td>
+              </tr>
+              <tr>
+                <td data-label="Name">TryHackMe Junior Penetration Tester</td>
+                <td data-label="Issuing Organization/Platform">TryHackMe</td>
+                <td data-label="Status/Date" class="status">Ongoing</td>
+                <td data-label="Details/Link">
+                  <a
+                    href="https://tryhackme.com/path/junior-pentester"
+                    target="_blank"
+                    >View Path</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Name">Certified Ethical Hacker (CEH)</td>
+                <td data-label="Issuing Organization/Platform">EC-Council</td>
+                <td data-label="Status/Date" class="status">Planned</td>
+                <td data-label="Details/Link">N/A</td>
+              </tr>
+              <tr>
+                <td data-label="Name">AWS Cloud Foundations</td>
+                <td data-label="Issuing Organization/Platform">
+                  Amazon Web Services
+                </td>
+                <td data-label="Status/Date">Completed</td>
+                <td data-label="Details/Link">
+                  <a href="YOUR_AWS_CERT_LINK" target="_blank">Verify</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Name">
+                  CCNA – Cisco Certified Network Associate
+                </td>
+                <td data-label="Issuing Organization/Platform">Cisco</td>
+                <td data-label="Status/Date">Completed</td>
+                <td data-label="Details/Link">
+                  <a href="YOUR_CCNA_CERT_LINK" target="_blank">Verify</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Name">
+                  MCSE – Microsoft Certified Solutions Expert (Active Directory)
+                </td>
+                <td data-label="Issuing Organization/Platform">Microsoft</td>
+                <td data-label="Status/Date">Completed</td>
+                <td data-label="Details/Link">
+                  <a href="YOUR_MCSE_CERT_LINK" target="_blank">Verify</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-<footer>
-    <p>&copy; 2026 ZWE MANN HEIN. All rights reserved.</p>
-</footer>
+        <h3 data-aos="fade-right" data-aos-delay="100">
+          Offensive Security & Web Application Security Training
+        </h3>
+        <div class="training-item" data-aos="fade-up" data-aos-delay="200">
+          <h4>Web Application Security Course</h4>
+          <p class="details">Starting June 2025</p>
+          <p class="details">
+            Studying OWASP Top 10, attack vectors (XSS, SQLi, IDOR), and tools
+            like Burp Suite, Nikto, SQLmap.
+          </p>
+        </div>
+        <div class="training-item" data-aos="fade-up" data-aos-delay="300">
+          <h4>Penetration Testing Practice</h4>
+          <p class="details">Ongoing</p>
+          <p class="details">
+            Engaged in TryHackMe labs covering web exploitation, privilege
+            escalation, and basic red teaming.
+          </p>
+        </div>
+      </section>
 
-</body>
+      <section id="contact" class="section">
+        <h2 data-aos="fade-left"><i class="fas fa-envelope"></i> Contact Me</h2>
+        <div class="contact-info" data-aos="fade-up">
+          <p>
+            I'm always open to discussing new projects, collaborations, or
+            opportunities. Feel free to reach out via email or connect with me
+            through my website.
+          </p>
+          <p>
+            <strong>Email:</strong>
+            <a href="mailto:zwemann872003@gmail.com"
+              ><i class="fas fa-at"></i> zwemann872003@gmail.com</a
+            >
+          </p>
+          <p>
+            <strong>Mobile:</strong>
+            <a href="tel:+959957008712"
+              ><i class="fas fa-phone"></i> 09957008712</a
+            >
+            /
+            <a href="tel:+959792840844"
+              ><i class="fas fa-phone"></i> 09792840844</a
+            >
+          </p>
+        </div>
+
+        <div class="social-links" data-aos="fade-up" data-aos-delay="200">
+          <h4>Follow Me / Visit My Site</h4>
+          <a href="http://zwemannhein.talk4fun.net" target="_blank"
+            ><i class="fas fa-globe"></i> Website (zwemannhein.talk4fun.net)</a
+          >
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        &copy; <span id="current-year"></span> ZWE MANN HEIN. All rights
+        reserved.
+      </p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800, // values from 0 to 3000, with step 50ms
+        once: false, // Set to false to trigger animations every time an element comes into view
+        easing: "ease-in-out", // default easing for AOS animations
+      });
+
+      // Set current year in footer
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+
+      // Smooth scrolling for anchor links & active nav state
+      document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          let targetId = this.getAttribute("href");
+          let targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            let headerOffset = document.querySelector("header").offsetHeight;
+            let elementPosition = targetElement.getBoundingClientRect().top;
+            let offsetPosition =
+              elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+            // Update active link immediately for better UX
+            document
+              .querySelectorAll("nav a")
+              .forEach((navLink) => navLink.classList.remove("active"));
+            this.classList.add("active");
+          }
+        });
+      });
+
+      // Set active nav link on scroll
+      const sections = document.querySelectorAll("section[id]");
+      const navLi = document.querySelectorAll("nav a");
+      const header = document.querySelector("header"); // Get header element
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+
+        // Update header class for scroll effect
+        if (window.scrollY > 50) {
+          // When scrolled down 50px
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+
+        sections.forEach((section) => {
+          // Recalculate header height in case it changes dynamically (e.g. on scroll)
+          const currentHeaderHeight =
+            document.querySelector("header").offsetHeight;
+          // Use section.getBoundingClientRect().top for more accurate position relative to viewport
+          const sectionTop =
+            section.getBoundingClientRect().top +
+            window.pageYOffset -
+            currentHeaderHeight -
+            50; // Adjusted offset for header
+
+          // Determine if the section is currently in view
+          // We consider a section "current" if its top is near the top of the viewport
+          // and it's before the next section's top (or it's the last section)
+          if (pageYOffset >= sectionTop) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLi.forEach((a) => {
+          a.classList.remove("active");
+          if (a.getAttribute("href").substring(1) === current) {
+            a.classList.add("active");
+          }
+        });
+
+        // Ensure "Home" is active if no other section is current (e.g., at the very top)
+        if (!current) {
+          // If no section is in view, default to 'hero' if at the top
+          let homeLink = document.querySelector('nav a[href="#hero"]');
+          if (homeLink) homeLink.classList.add("active");
+        }
+      });
+
+      // Initial active link check on page load and scroll to hash if present
+      window.addEventListener("load", () => {
+        if (window.location.hash) {
+          let initialLink = document.querySelector(
+            `nav a[href="${window.location.hash}"]`
+          );
+          if (initialLink) {
+            document
+              .querySelectorAll("nav a")
+              .forEach((navLink) => navLink.classList.remove("active"));
+            initialLink.classList.add("active");
+            let targetElement = document.querySelector(window.location.hash);
+            if (targetElement) {
+              setTimeout(() => {
+                // Timeout to ensure layout is stable after AOS/rendering
+                let headerOffset =
+                  document.querySelector("header").offsetHeight;
+                let elementPosition = targetElement.getBoundingClientRect().top;
+                let offsetPosition =
+                  elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: "smooth",
+                });
+              }, 100);
+            }
+          }
+        } else {
+          // If no hash, set home as active initially
+          let homeLink = document.querySelector('nav a[href="#hero"]');
+          if (homeLink) homeLink.classList.add("active");
+        }
+      });
+    </script>
+  </body>
 </html>
